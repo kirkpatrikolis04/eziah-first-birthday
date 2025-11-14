@@ -178,7 +178,7 @@ const CountDown = () => {
 
     return ( 
         <div className='text-center flex flex-col gap-[6px] p-[11px] pt-0'>
-            <p className="font-semibold max-[767px]:text-[14px]">Please respond before November 20, 2025</p>
+            <p className="font-semibold max-[767px]:text-[14px]">Please respond until November 20, 2025</p>
             <div ref={containerRef}></div>
         </div>
     );
