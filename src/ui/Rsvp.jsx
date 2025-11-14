@@ -49,7 +49,7 @@ const Rsvp = ({ handleModal }) => {
                         <p className="relative text-center text-[22px] max-w-[752px] mx-auto text-black max-[767px]:text-[4.2vw] max-[767px]:mb-[24px]">
                         Our little fairy can’t wait to celebrate with you!
                         Please let us know if you’ll sprinkle some magic with us ✨
-                        Kindly respond before November 20💖
+                        Kindly respond before or on November 20💖
                         </p>
                         <div className="flex justify-center items-center">
                             <button onClick={handleModal} className={`cursor-pointer relative right-[-75px] text-[40px] py-[10px] px-[45px] border-[2px] border-[#d56dbd] rounded-[60px] max-[1200px]:whitespace-nowrap max-[900px]:text-[25px] max-[767px]:mt-[61%] ${disableButton ? 'pointer-events-none' : ''}`}>{buttonText}</button>
