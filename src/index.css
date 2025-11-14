@@ -1,0 +1,212 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-birthday-pink: #fff4f2;
+  --color-birthday-brown: #936066;
+  --color-birthday-pink-500: #d6989c;
+  --color-birthday-pink-900: #bd0e97;
+  --color-birthday-pink-transparent: #d6989c99;
+  --font-playfair-display: 'Playfair Display', serif;
+  --font-baloo-bhaijaan: 'Baloo Bhaijaan 2', serif;
+  --font-quick-sand: 'Quicksand', serif;
+}
+
+body {
+    font-family: "Quicksand", sans-serif;
+}
+
+/* h1, h2, h3, h4, h5, h6 {
+    font-family: "Great Vibes", cursive;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+} */
+
+/* Fix for react-ticker overlapping issue */
+[data-react-ticker] {
+    position: relative !important;
+    overflow: hidden !important;
+    width: 100% !important;
+}
+
+[data-react-ticker] > div {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    position: absolute !important;
+}
+
+/* Prevent overlapping in ticker content */
+[data-react-ticker] span,
+[data-react-ticker] div {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    position: relative !important;
+}
+
+.ds-text {
+    max-width: fit-content;
+    margin: 0 auto;
+}
+.ds-fairy1 {
+    max-width: 204px;
+    transform: rotate(-12deg);
+    position: absolute;
+    top: -94px;
+    right: -168px;
+    z-index: -1;
+}
+.ds-fairy2 {
+    max-width: 164px;
+    transform: scaleX(-1) rotate(-12deg);
+    position: absolute;
+    top: -68px;
+    left: -164px;
+    z-index: -1;
+}
+
+/* countdown */
+.sale-banner__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+.sale-banner__time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+}
+.sale-banner .group-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+.sale-banner .group-time span:first-child {
+    font-size: 20px;
+    font-weight: 700;
+    background: #f8e6e4;
+    padding: 0px 10px;
+    border-radius: 8px;
+    min-width: 54px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    color: #936066;
+}
+.sale-banner .group-time span:last-child {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: .5rem;
+    font-weight: 500;
+    font-weight: 600;
+}
+
+@media(max-width: 1600px) {
+    .reminder-lists {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        max-width: 590px;
+        margin-left: auto;
+        margin-right: auto;
+        row-gap: 25px;
+        margin-top: 35px;
+    }
+    .reminder-lists div:first-child img,
+    .reminder-lists div:nth-of-type(3) img  {
+        max-width: 40%;
+    }
+    .reminder-lists div:nth-of-type(2) img {
+        max-width: 65%;
+        margin-top: -35px;
+        margin-bottom: -38px;
+    }
+    .reminder-lists div:nth-of-type(2) p {
+        margin-top: 14px;
+        position: relative;
+    }
+    .reminder-lists div:last-child img {
+        max-width: 42%;
+        margin-top: 5px;
+    }
+}
+@media(max-width: 900px) {
+    .ds-fairy1 {
+        top: -180px;
+        right: -90px;
+    }
+    .ds-fairy2 {
+        left: -77px;
+        top: -156px
+    }
+    .mobile-navigation {
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        position: fixed;
+        background: #f8e6e4;
+        z-index: 10;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        top: 150px;
+        padding-top: 33px;
+        overflow: auto;
+    }
+    .mobile-navigation.nav-normal {
+        position: absolute;
+    }
+    .mobile-navigation li a {
+        font-size: 27px;
+    }
+    .mobile-navigation.open {
+        display: flex;
+        gap: 22px;
+    }
+    body:has(.mobile-navigation.open) {
+        overflow: hidden;
+    }
+    html:has(.mobile-navigation.open) {
+        overflow: hidden;
+    }
+    header {
+        padding-top: 10px;
+        padding-bottom: 0;
+    }
+}
+@media(max-width: 767px) {
+    .reminder-lists {
+        grid-template-columns: 1fr;
+    }
+    .reminder-lists div:nth-of-type(2) img {
+        margin-bottom: -18px;
+    }
+    .mobile-navigation {
+        top: 147px;
+    }
+    .sale-banner__container {
+        padding: 0;
+    }
+    header {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .sale-banner .group-time {
+        min-width: 70px;
+    }
+}
+@media(max-width: 500px) {
+    .ds-fairy1 {
+        right: -25px;
+        top: -131px;
+        max-width: 106px;
+    }
+    .ds-fairy2 {
+        left: -16px;
+        top: -123px;
+        max-width: 81px;
+    }
+}
