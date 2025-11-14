@@ -116,7 +116,7 @@ const Modal = ({ membersList, urlId, handleModal }) => {
                             </h3>
                         )}
                         <h2 className="text-[24px] font-semibold leading-[1.2] text-black max-[767px]:text-[22px]">
-                            We’d love to celebrate this special day with you! Please confirm if you’ll be joining the party below.
+                            We’d love to celebrate this special day with you! Please confirm if you’ll be joining the party.
                         </h2>
                         <div
                             className="py-5"
