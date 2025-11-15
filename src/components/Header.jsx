@@ -52,7 +52,7 @@ const Header = () => {
     const scrollToSection = (sectionId) => {
         const element = document.getElementById(sectionId);
         if (element) {
-            const headerHeight = 80; // Approximate header height
+            const headerHeight = 149; // Approximate header height
             const elementPosition = element.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.scrollY - headerHeight;
 

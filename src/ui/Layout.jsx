@@ -9,6 +9,7 @@ import GiftIdeas from './GiftIdeas';
 import Reminder from './Reminder';
 import Rsvp from './Rsvp';
 import Loader from '../components/Loader';
+import ErrorPage from './ErrorPage';
 
 const Layout = () => {
 
@@ -17,6 +18,7 @@ const Layout = () => {
     const [submittedOnce, setSubmittedOnce] = useState(false)
     const [membersList, setMembersList] = useState(null);
     const [urlId, setUrlId] = useState(null);
+    const [siteError, setSiteError] = useState(false)
 
     useEffect(() => {
         // Extract id from URL query string
@@ -35,11 +37,14 @@ const Layout = () => {
             try {
                 const response = await fetch(`https://sheet2api.com/v1/PUlYBHXySfKr/eziah_1st-bday?id=${urlId}`);
                 const results = await response.json();
-                results.forEach(item => {
-                    setMembersList(item)
-                    console.log(item, 'aagaga')
-                    setAlreadyResponded(item.choice !== '' ? true : false)
-                });
+                if(results.length > 0) {
+                    results.forEach(item => {
+                        setMembersList(item)
+                        setAlreadyResponded(item.choice !== '' ? true : false)
+                    });
+                }  else {
+                    setSiteError(true)
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -51,25 +56,27 @@ const Layout = () => {
         setModal(prev => !prev)
     }
 
-    /* console.log(membersList, "membersList") */
-
 
     return ( 
-        <div className="main-layout">
-            {modal && (
-                <Modal membersList={membersList} urlId={urlId} handleModal={handleModal} alreadyResponded={alreadyResponded} setAlreadyResponded={setAlreadyResponded} submittedOnce={submittedOnce} setSubmittedOnce={setSubmittedOnce} />
-            )}
-            <Header />
-            <Hero />
-            <EvenDetails />
-            <MonthlyMilestones />
-            <DressCode />
-            <GiftIdeas />
-            <Reminder />
-            <Rsvp handleModal={handleModal} />
-            {!membersList && <Loader />}  
-                      
-        </div>
+        siteError ? (
+            <ErrorPage />
+        ) : (
+            <div className="main-layout">
+                {modal && (
+                    <Modal membersList={membersList} urlId={urlId} handleModal={handleModal} alreadyResponded={alreadyResponded} setAlreadyResponded={setAlreadyResponded} submittedOnce={submittedOnce} setSubmittedOnce={setSubmittedOnce} />
+                )}
+                <Header />
+                <Hero />
+                <EvenDetails />
+                <MonthlyMilestones />
+                <DressCode />
+                <GiftIdeas />
+                <Reminder />
+                <Rsvp handleModal={handleModal} />
+                {!membersList && <Loader />}   
+            </div>
+        )
+        
      );
 }
  
