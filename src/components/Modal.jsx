@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Loader from '../assets/loader.gif';
 import Baby from '../assets/baby.jpg'
 
-const Modal = ({ membersList, urlId, handleModal }) => {
+const Modal = ({ membersList, urlId, handleModal, alreadyResponded, setAlreadyResponded, submittedOnce, setSubmittedOnce }) => {
 
 
     const [formData, setFormData] = useState({
@@ -11,8 +11,17 @@ const Modal = ({ membersList, urlId, handleModal }) => {
     });
     const [loader, setLoader] = useState(false);
     const [showMessage, setShowMessage] = useState(false)
-    const [thankYou, setThankYou] = useState(false)
-    const [status, setStatus] = useState(null)
+    const hasInitialChoice = membersList.choice !== ''
+    const [thankYou, setThankYou] = useState(hasInitialChoice)
+    const [status, setStatus] = useState(hasInitialChoice ? membersList.choice : null)
+    const [responded, setResponded] = useState(hasInitialChoice ? true : false)
+
+    useEffect(() => {
+        const hasChoice = membersList.choice !== ''
+        setThankYou(hasChoice)
+        setStatus(hasChoice ? membersList.choice : null)
+        setResponded(hasChoice ? true : false)
+    }, [membersList])
 
     const handleChange = (e) => {
         setFormData(prev => ({
@@ -26,6 +35,13 @@ const Modal = ({ membersList, urlId, handleModal }) => {
             ...prev,
             choice:  e.target.value
         }))
+    }
+    
+    const handleClose = () => {
+        handleModal()
+        if(thankYou || submittedOnce) {
+            setAlreadyResponded(true)
+        }
     }
 
     const handleSubmit = (e) => {
@@ -68,6 +84,7 @@ const Modal = ({ membersList, urlId, handleModal }) => {
             }))
             setLoader(false);
             setThankYou(true)
+            setSubmittedOnce(true)
         })
         .catch(error => {
             console.error("Error submitting review:", error);
@@ -79,29 +96,33 @@ const Modal = ({ membersList, urlId, handleModal }) => {
         <div className="fixed inset-[0] z-[9999] bg-[#000000e6] flex justify-center items-center flex-col px-5">
             <div className="bg-[#f8e6e4] w-full max-w-[500px] p-8 pt-[40px] shadow-lg rounded-lg relative">
                 <button
-                    onClick={handleModal}
+                    onClick={handleClose}
                     aria-label="Close"
                     className="absolute top-0 right-4 text-[35px] cursor-pointer text-[#870e6d] font-bold rounded-full flex items-center justify-center"
                     type="button"
                 >
                     &times;
                 </button>
-                {thankYou ? (
+                {thankYou || alreadyResponded ? (
                     <>
                         <img src={Baby} className='rounded-[50%] w-[100px] h-[100px] object-cover mx-auto mb-[20px]' />
-                        {status === 'Yes' ? (
-                            <>
-                                <h1  className='text-center font-semibold text-[27px] leading-[1.3] font-baloo-bhaijaan max-auto'>Thank you for your response!</h1>
-                                <p className='text-center font-semibold text-[19px] mt-2'>See you at the fairy celebration! 🌷</p>
-                            </>
+                        {!responded && !alreadyResponded ? (
+                            status === 'Yes' ? (
+                                <>
+                                    <h1  className='text-center font-semibold text-[27px] leading-[1.3] font-baloo-bhaijaan max-auto'>Thank you for your response!</h1>
+                                    <p className='text-center font-semibold text-[19px] mt-2'>See you at the fairy celebration! 🌷</p>
+                                </>
+                            ) : (
+                                <p className='text-center font-semibold text-[20px] mt-2'>Oh no, the fairies will miss your sparkle! ✨
+                            Sending a sprinkle of magic your way — thank you for letting us know. 💕</p>
+                            )
                         ) : (
-                            <p className='text-center font-semibold text-[20px] mt-2'>Oh no, the fairies will miss your sparkle! ✨
-                        Sending a sprinkle of magic your way — thank you for letting us know. 💕</p>
+                            <h1  className='text-center font-semibold text-[27px] leading-[1.3] font-baloo-bhaijaan max-auto'>We already received your response!</h1>
                         )}
                         <div className='flex flex-col gap-[20px] mt-[16px]'>
                             <p className='text-center'>If you change your mind, you can still update your RSVP response — just make sure to do it on or before November 20. Click the button below to make any changes. 💫</p>
                             <button
-                                onClick={() => setThankYou(false)}
+                                onClick={() => (setThankYou(false), setAlreadyResponded(false))}
                                 className="w-full bg-birthday-pink-900 text-white p-2 rounded-lg shadow-lg cursor-pointer hover:bg-[#870e6d]"
                             >
                                 Update RSVP

@@ -13,6 +13,8 @@ import Loader from '../components/Loader';
 const Layout = () => {
 
     const [modal, setModal] = useState(false);
+    const [alreadyResponded, setAlreadyResponded] = useState(false)
+    const [submittedOnce, setSubmittedOnce] = useState(false)
     const [membersList, setMembersList] = useState(null);
     const [urlId, setUrlId] = useState(null);
 
@@ -35,7 +37,8 @@ const Layout = () => {
                 const results = await response.json();
                 results.forEach(item => {
                     setMembersList(item)
-                    console.log(item, 'item')
+                    console.log(item, 'aagaga')
+                    setAlreadyResponded(item.choice !== '' ? true : false)
                 });
             } catch (error) {
                 console.error(error);
@@ -54,7 +57,7 @@ const Layout = () => {
     return ( 
         <div className="main-layout">
             {modal && (
-                <Modal membersList={membersList} urlId={urlId} handleModal={handleModal} />
+                <Modal membersList={membersList} urlId={urlId} handleModal={handleModal} alreadyResponded={alreadyResponded} setAlreadyResponded={setAlreadyResponded} submittedOnce={submittedOnce} setSubmittedOnce={setSubmittedOnce} />
             )}
             <Header />
             <Hero />

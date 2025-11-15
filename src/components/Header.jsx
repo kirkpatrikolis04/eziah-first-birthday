@@ -84,7 +84,7 @@ const Header = () => {
             <ul className={`flex gap-10 justify-center max-[900px]:hidden mobile-navigation ${!shouldShowFixed ? `nav-normal` : ''} ${showNav ? 'open' : ''}`}>
                 <li><a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }} className="text-[18px] font-semibold text-birthday-brown outline-[none] cursor-pointer">Home</a></li>
                 <li><a href="#event-details" onClick={(e) => { e.preventDefault(); scrollToSection('event-details'); }} className="text-[18px] font-semibold text-birthday-brown outline-[none] cursor-pointer">Event Details</a></li>
-                <li><a href="#monthly-milestone" onClick={(e) => { e.preventDefault(); scrollToSection('monthly-milestone'); }} className="text-[18px] font-semibold text-birthday-brown outline-[none] cursor-pointer">Montly Milestone</a></li>
+                <li><a href="#monthly-milestone" onClick={(e) => { e.preventDefault(); scrollToSection('monthly-milestone'); }} className="text-[18px] font-semibold text-birthday-brown outline-[none] cursor-pointer">Monthly Milestone</a></li>
                 <li><a href="#dress-code" onClick={(e) => { e.preventDefault(); scrollToSection('dress-code'); }} className="text-[18px] font-semibold text-birthday-brown outline-[none] cursor-pointer">Dress Code</a></li>
                 <li><a href="#gift-ideas" onClick={(e) => { e.preventDefault(); scrollToSection('gift-ideas'); }} className="text-[18px] font-semibold text-birthday-brown outline-[none] cursor-pointer">Gift Ideas</a></li>
                 <li><a href="#reminders" onClick={(e) => { e.preventDefault(); scrollToSection('reminders'); }} className="text-[18px] font-semibold text-birthday-brown outline-[none] cursor-pointer">Reminders</a></li>
